@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3101BD00213E5A7A00589B36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3101BCFF213E5A7A00589B36 /* AppDelegate.m */; };
+		3101BD03213E5A7A00589B36 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3101BD02213E5A7A00589B36 /* ViewController.m */; };
+		3101BD06213E5A7A00589B36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3101BD04213E5A7A00589B36 /* Main.storyboard */; };
+		3101BD08213E5A7C00589B36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3101BD07213E5A7C00589B36 /* Assets.xcassets */; };
+		3101BD0B213E5A7C00589B36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3101BD09213E5A7C00589B36 /* LaunchScreen.storyboard */; };
+		3101BD0E213E5A7C00589B36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3101BD0D213E5A7C00589B36 /* main.m */; };
+		3101BD18213E5A7C00589B36 /* WSL_RollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3101BD17213E5A7C00589B36 /* WSL_RollViewTests.m */; };
+		3101BD23213E5A7C00589B36 /* WSL_RollViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3101BD22213E5A7C00589B36 /* WSL_RollViewUITests.m */; };
+		3101BD32213E604D00589B36 /* VerticalRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3101BD31213E604D00589B36 /* VerticalRollViewController.m */; };
+		31ABBA1D2143A223007E004F /* WSLRollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBA1C2143A223007E004F /* WSLRollView.m */; };
+		31B863F02144EDE900B4CDD7 /* HorizontalRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B863EF2144EDE900B4CDD7 /* HorizontalRollViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3101BD14213E5A7C00589B36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3101BCF3213E5A7A00589B36 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3101BCFA213E5A7A00589B36;
+			remoteInfo = WSL_RollView;
+		};
+		3101BD1F213E5A7C00589B36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3101BCF3213E5A7A00589B36 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3101BCFA213E5A7A00589B36;
+			remoteInfo = WSL_RollView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3101BCFB213E5A7A00589B36 /* WSL_RollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WSL_RollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3101BCFE213E5A7A00589B36 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3101BCFF213E5A7A00589B36 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3101BD01213E5A7A00589B36 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3101BD02213E5A7A00589B36 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3101BD05213E5A7A00589B36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3101BD07213E5A7C00589B36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3101BD0A213E5A7C00589B36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3101BD0C213E5A7C00589B36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3101BD0D213E5A7C00589B36 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3101BD13213E5A7C00589B36 /* WSL_RollViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WSL_RollViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3101BD17213E5A7C00589B36 /* WSL_RollViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSL_RollViewTests.m; sourceTree = "<group>"; };
+		3101BD19213E5A7C00589B36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3101BD1E213E5A7C00589B36 /* WSL_RollViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WSL_RollViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3101BD22213E5A7C00589B36 /* WSL_RollViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSL_RollViewUITests.m; sourceTree = "<group>"; };
+		3101BD24213E5A7D00589B36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3101BD30213E604C00589B36 /* VerticalRollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerticalRollViewController.h; sourceTree = "<group>"; };
+		3101BD31213E604D00589B36 /* VerticalRollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerticalRollViewController.m; sourceTree = "<group>"; };
+		3101BD33213E614F00589B36 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		31ABBA1B2143A223007E004F /* WSLRollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WSLRollView.h; sourceTree = "<group>"; };
+		31ABBA1C2143A223007E004F /* WSLRollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSLRollView.m; sourceTree = "<group>"; };
+		31B863EE2144EDE900B4CDD7 /* HorizontalRollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HorizontalRollViewController.h; sourceTree = "<group>"; };
+		31B863EF2144EDE900B4CDD7 /* HorizontalRollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HorizontalRollViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3101BCF8213E5A7A00589B36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3101BD10213E5A7C00589B36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3101BD1B213E5A7C00589B36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3101BCF2213E5A7A00589B36 = {
+			isa = PBXGroup;
+			children = (
+				3101BCFD213E5A7A00589B36 /* WSL_RollView */,
+				3101BD16213E5A7C00589B36 /* WSL_RollViewTests */,
+				3101BD21213E5A7C00589B36 /* WSL_RollViewUITests */,
+				3101BCFC213E5A7A00589B36 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3101BCFC213E5A7A00589B36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3101BCFB213E5A7A00589B36 /* WSL_RollView.app */,
+				3101BD13213E5A7C00589B36 /* WSL_RollViewTests.xctest */,
+				3101BD1E213E5A7C00589B36 /* WSL_RollViewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3101BCFD213E5A7A00589B36 /* WSL_RollView */ = {
+			isa = PBXGroup;
+			children = (
+				3101BCFE213E5A7A00589B36 /* AppDelegate.h */,
+				3101BCFF213E5A7A00589B36 /* AppDelegate.m */,
+				3101BD33213E614F00589B36 /* PrefixHeader.pch */,
+				3101BD01213E5A7A00589B36 /* ViewController.h */,
+				3101BD02213E5A7A00589B36 /* ViewController.m */,
+				31ABBA1B2143A223007E004F /* WSLRollView.h */,
+				31ABBA1C2143A223007E004F /* WSLRollView.m */,
+				31B863EE2144EDE900B4CDD7 /* HorizontalRollViewController.h */,
+				31B863EF2144EDE900B4CDD7 /* HorizontalRollViewController.m */,
+				3101BD30213E604C00589B36 /* VerticalRollViewController.h */,
+				3101BD31213E604D00589B36 /* VerticalRollViewController.m */,
+				3101BD04213E5A7A00589B36 /* Main.storyboard */,
+				3101BD07213E5A7C00589B36 /* Assets.xcassets */,
+				3101BD09213E5A7C00589B36 /* LaunchScreen.storyboard */,
+				3101BD0C213E5A7C00589B36 /* Info.plist */,
+				3101BD0D213E5A7C00589B36 /* main.m */,
+			);
+			path = WSL_RollView;
+			sourceTree = "<group>";
+		};
+		3101BD16213E5A7C00589B36 /* WSL_RollViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				3101BD17213E5A7C00589B36 /* WSL_RollViewTests.m */,
+				3101BD19213E5A7C00589B36 /* Info.plist */,
+			);
+			path = WSL_RollViewTests;
+			sourceTree = "<group>";
+		};
+		3101BD21213E5A7C00589B36 /* WSL_RollViewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3101BD22213E5A7C00589B36 /* WSL_RollViewUITests.m */,
+				3101BD24213E5A7D00589B36 /* Info.plist */,
+			);
+			path = WSL_RollViewUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3101BCFA213E5A7A00589B36 /* WSL_RollView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3101BD27213E5A7D00589B36 /* Build configuration list for PBXNativeTarget "WSL_RollView" */;
+			buildPhases = (
+				3101BCF7213E5A7A00589B36 /* Sources */,
+				3101BCF8213E5A7A00589B36 /* Frameworks */,
+				3101BCF9213E5A7A00589B36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WSL_RollView;
+			productName = WSL_RollView;
+			productReference = 3101BCFB213E5A7A00589B36 /* WSL_RollView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3101BD12213E5A7C00589B36 /* WSL_RollViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3101BD2A213E5A7D00589B36 /* Build configuration list for PBXNativeTarget "WSL_RollViewTests" */;
+			buildPhases = (
+				3101BD0F213E5A7C00589B36 /* Sources */,
+				3101BD10213E5A7C00589B36 /* Frameworks */,
+				3101BD11213E5A7C00589B36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3101BD15213E5A7C00589B36 /* PBXTargetDependency */,
+			);
+			name = WSL_RollViewTests;
+			productName = WSL_RollViewTests;
+			productReference = 3101BD13213E5A7C00589B36 /* WSL_RollViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3101BD1D213E5A7C00589B36 /* WSL_RollViewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3101BD2D213E5A7D00589B36 /* Build configuration list for PBXNativeTarget "WSL_RollViewUITests" */;
+			buildPhases = (
+				3101BD1A213E5A7C00589B36 /* Sources */,
+				3101BD1B213E5A7C00589B36 /* Frameworks */,
+				3101BD1C213E5A7C00589B36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3101BD20213E5A7C00589B36 /* PBXTargetDependency */,
+			);
+			name = WSL_RollViewUITests;
+			productName = WSL_RollViewUITests;
+			productReference = 3101BD1E213E5A7C00589B36 /* WSL_RollViewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3101BCF3213E5A7A00589B36 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "https://www.jianshu.com/u/e15d1f644bea";
+				TargetAttributes = {
+					3101BCFA213E5A7A00589B36 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					3101BD12213E5A7C00589B36 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 3101BCFA213E5A7A00589B36;
+					};
+					3101BD1D213E5A7C00589B36 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 3101BCFA213E5A7A00589B36;
+					};
+				};
+			};
+			buildConfigurationList = 3101BCF6213E5A7A00589B36 /* Build configuration list for PBXProject "WSL_RollView" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3101BCF2213E5A7A00589B36;
+			productRefGroup = 3101BCFC213E5A7A00589B36 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3101BCFA213E5A7A00589B36 /* WSL_RollView */,
+				3101BD12213E5A7C00589B36 /* WSL_RollViewTests */,
+				3101BD1D213E5A7C00589B36 /* WSL_RollViewUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3101BCF9213E5A7A00589B36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3101BD0B213E5A7C00589B36 /* LaunchScreen.storyboard in Resources */,
+				3101BD08213E5A7C00589B36 /* Assets.xcassets in Resources */,
+				3101BD06213E5A7A00589B36 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3101BD11213E5A7C00589B36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3101BD1C213E5A7C00589B36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3101BCF7213E5A7A00589B36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3101BD03213E5A7A00589B36 /* ViewController.m in Sources */,
+				31B863F02144EDE900B4CDD7 /* HorizontalRollViewController.m in Sources */,
+				3101BD32213E604D00589B36 /* VerticalRollViewController.m in Sources */,
+				3101BD0E213E5A7C00589B36 /* main.m in Sources */,
+				31ABBA1D2143A223007E004F /* WSLRollView.m in Sources */,
+				3101BD00213E5A7A00589B36 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3101BD0F213E5A7C00589B36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3101BD18213E5A7C00589B36 /* WSL_RollViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3101BD1A213E5A7C00589B36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3101BD23213E5A7C00589B36 /* WSL_RollViewUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3101BD15213E5A7C00589B36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3101BCFA213E5A7A00589B36 /* WSL_RollView */;
+			targetProxy = 3101BD14213E5A7C00589B36 /* PBXContainerItemProxy */;
+		};
+		3101BD20213E5A7C00589B36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3101BCFA213E5A7A00589B36 /* WSL_RollView */;
+			targetProxy = 3101BD1F213E5A7C00589B36 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3101BD04213E5A7A00589B36 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3101BD05213E5A7A00589B36 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3101BD09213E5A7C00589B36 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3101BD0A213E5A7C00589B36 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3101BD25213E5A7D00589B36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3101BD26213E5A7D00589B36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3101BD28213E5A7D00589B36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = WSL_RollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chinaDaily.WSL-RollView";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3101BD29213E5A7D00589B36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = WSL_RollView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chinaDaily.WSL-RollView";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3101BD2B213E5A7D00589B36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WSL_RollViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chinaDaily.WSL-RollViewTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WSL_RollView.app/WSL_RollView";
+			};
+			name = Debug;
+		};
+		3101BD2C213E5A7D00589B36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WSL_RollViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chinaDaily.WSL-RollViewTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WSL_RollView.app/WSL_RollView";
+			};
+			name = Release;
+		};
+		3101BD2E213E5A7D00589B36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WSL_RollViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chinaDaily.WSL-RollViewUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WSL_RollView;
+			};
+			name = Debug;
+		};
+		3101BD2F213E5A7D00589B36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WSL_RollViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chinaDaily.WSL-RollViewUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WSL_RollView;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3101BCF6213E5A7A00589B36 /* Build configuration list for PBXProject "WSL_RollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3101BD25213E5A7D00589B36 /* Debug */,
+				3101BD26213E5A7D00589B36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3101BD27213E5A7D00589B36 /* Build configuration list for PBXNativeTarget "WSL_RollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3101BD28213E5A7D00589B36 /* Debug */,
+				3101BD29213E5A7D00589B36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3101BD2A213E5A7D00589B36 /* Build configuration list for PBXNativeTarget "WSL_RollViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3101BD2B213E5A7D00589B36 /* Debug */,
+				3101BD2C213E5A7D00589B36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3101BD2D213E5A7D00589B36 /* Build configuration list for PBXNativeTarget "WSL_RollViewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3101BD2E213E5A7D00589B36 /* Debug */,
+				3101BD2F213E5A7D00589B36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3101BCF3213E5A7A00589B36 /* Project object */;
+}
