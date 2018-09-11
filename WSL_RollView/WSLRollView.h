@@ -14,14 +14,6 @@
 @interface WSLRollViewCell : UICollectionViewCell
 @end
 
-/**
- 滚动样式
- */
-typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
-    WSLRollViewScrollStylePage = 0, /** 翻页 */
-    WSLRollViewScrollStyleStep   /** 渐进 */
-};
-
 @class WSLRollView;
 
 //代理协议
@@ -48,6 +40,14 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
  */
 - (WSLRollViewCell *)rollView:(WSLRollView *)rollView cellForItemAtIndex:(NSInteger )index;
 @end
+
+/**
+ 滚动样式
+ */
+typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
+    WSLRollViewScrollStylePage = 0, /** 翻页 必须等宽或高*/
+    WSLRollViewScrollStyleStep   /** 渐进 可以不等宽或高*/
+};
 
 @interface WSLRollView : UIView
 
