@@ -92,8 +92,8 @@
 //返回itemSize
 - (CGSize)rollView:(WSLRollView *)rollView sizeForItemAtIndex:(NSInteger)index{
     if (rollView.scrollStyle == WSLRollViewScrollStylePage){
-//        return CGSizeMake(SCREEN_WIDTH, KRollViewHeight);
-        return CGSizeMake((SCREEN_WIDTH - [self spaceOfItemInRollView:rollView] * 2)/2.0, KRollViewHeight);
+        return CGSizeMake(SCREEN_WIDTH, KRollViewHeight);
+//        return CGSizeMake((SCREEN_WIDTH - [self spaceOfItemInRollView:rollView] * 2)/2.0, KRollViewHeight);
     }else{
         NSNumber * width = _array[index][@"width"];
         NSNumber * height = _array[index][@"height"];
@@ -104,7 +104,7 @@
 //间隔
 - (CGFloat)spaceOfItemInRollView:(WSLRollView *)rollView{
     if (rollView.scrollStyle == WSLRollViewScrollStylePage){
-        return 10;
+        return 0;
     }else{
         return 10;
     }

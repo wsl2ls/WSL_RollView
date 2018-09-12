@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- 默认cell样式
+ 默认cell样式 WSLItemID
  */
 @interface WSLRollViewCell : UICollectionViewCell
 @end
