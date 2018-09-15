@@ -73,7 +73,6 @@
         // 计算 CollectionView 中点值
         CGFloat centerX = proposedContentOffset.x + self.collectionView.frame.size.width * 0.5;
         for (UICollectionViewLayoutAttributes *attrs in array){
-            
             if (ABS(minDetal) > ABS(centerX - attrs.center.x)){
                 minDetal = attrs.center.x - centerX;
             }

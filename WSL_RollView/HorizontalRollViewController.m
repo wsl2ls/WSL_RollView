@@ -25,6 +25,8 @@
         self.titleLabel.userInteractionEnabled = YES;
         [self.contentView addSubview:self.titleLabel];
         self.contentView.clipsToBounds = YES;
+//        self.contentView.autoresizesSubviews = YES;
+//        self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     }
     return self;
 }
@@ -94,7 +96,7 @@
     if (rollView.scrollStyle == WSLRollViewScrollStylePage){
         //        return CGSizeMake(SCREEN_WIDTH, KRollViewHeight);
         //        return CGSizeMake((SCREEN_WIDTH - [self spaceOfItemInRollView:rollView] * 2)/2.0, KRollViewHeight);
-        return CGSizeMake(250, KRollViewHeight);
+        return CGSizeMake(300, KRollViewHeight);
     }else{
         NSNumber * width = _array[index][@"width"];
         NSNumber * height = _array[index][@"height"];
@@ -114,7 +116,7 @@
 //内边距
 - (UIEdgeInsets)paddingOfRollView:(WSLRollView *)rollView{
     if (rollView.scrollStyle == WSLRollViewScrollStylePage){
-        return UIEdgeInsetsMake(0,[self spaceOfItemInRollView:rollView],0,0);
+        return UIEdgeInsetsMake(0,[self spaceOfItemInRollView:rollView],0,[self spaceOfItemInRollView:rollView]);
     }else{
         return UIEdgeInsetsMake(0,10,0,10);
     }

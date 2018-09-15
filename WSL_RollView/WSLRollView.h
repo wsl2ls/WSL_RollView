@@ -45,7 +45,7 @@
  滚动样式
  */
 typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
-    WSLRollViewScrollStylePage = 0, /** 翻页 必须等宽或高*/
+    WSLRollViewScrollStylePage = 0, /** 分页 必须等宽或高*/
     WSLRollViewScrollStyleStep   /** 渐进 可以不等宽或高*/
 };
 
@@ -57,21 +57,26 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
 @property (nonatomic, strong) NSMutableArray * sourceArray;
 
 /**
+ 是否循环轮播 默认YES
+ */
+@property (nonatomic, assign) BOOL loopEnabled;
+
+/**
  轮播方向 默认是 UICollectionViewScrollDirectionHorizontal 水平
  */
 @property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;
 
 /**
- 轮播样式 默认是 WSLRollViewScrollStylePage 翻页
+ 轮播样式 默认是 WSLRollViewScrollStylePage 分页
  */
 @property (nonatomic, assign) WSLRollViewScrollStyle scrollStyle;
 
 /**
- 渐进轮播速率 单位是Point/s，以坐标系单位为准 默认60/s
+ 渐进轮播速率 单位是Point/s，以坐标系单位为准 默认60/s 如果为0 表示禁止计时器
  */
 @property (nonatomic, assign) CGFloat speed;
 /**
- 翻页轮播间隔时长 单位是s  默认3s
+ 分页轮播间隔时长 单位是s  默认3s 如果为0 表示禁止计时器
  */
 @property (nonatomic, assign) CGFloat interval;
 
