@@ -25,6 +25,7 @@
     
     NSArray *array = [super layoutAttributesForElementsInRect:rect];
     
+    /*
     if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal){
         // 计算 CollectionView 的中点
         CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
@@ -45,6 +46,7 @@
             attrs.transform = CGAffineTransformMakeScale(scale, scale);
         }
     }
+     */
     return array;
 }
 
@@ -60,34 +62,36 @@
  */
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity{
     
-    // NSLog(@"%@",NSStringFromCGPoint(proposedContentOffset));
-    CGSize size = self.collectionView.frame.size;
-    
-    // 计算可见区域的面积
-    CGRect rect = CGRectMake(proposedContentOffset.x, proposedContentOffset.y, size.width, size.height);
-    NSArray *array = [super layoutAttributesForElementsInRect:rect];
-    // 标记 cell 的中点与 UICollectionView 中点最小的间距
-    CGFloat minDetal = MAXFLOAT;
-    
-    if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal){
-        // 计算 CollectionView 中点值
-        CGFloat centerX = proposedContentOffset.x + self.collectionView.frame.size.width * 0.5;
-        for (UICollectionViewLayoutAttributes *attrs in array){
-            if (ABS(minDetal) > ABS(centerX - attrs.center.x)){
-                minDetal = attrs.center.x - centerX;
+    if (_scrollStyle == WSLRollViewScrollStylePage) {
+        CGSize size = self.collectionView.frame.size;
+        // 计算可见区域的面积
+        CGRect rect = CGRectMake(proposedContentOffset.x, proposedContentOffset.y, size.width, size.height);
+        NSArray *array = [super layoutAttributesForElementsInRect:rect];
+        // 标记 cell 的中点与 UICollectionView 中点最小的间距
+        CGFloat minDetal = MAXFLOAT;
+        
+        if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal){
+            // 计算 CollectionView 中点值
+            CGFloat centerX = proposedContentOffset.x + self.collectionView.frame.size.width * 0.5;
+            for (UICollectionViewLayoutAttributes *attrs in array){
+                if (ABS(minDetal) > ABS(centerX - attrs.center.x)){
+                    minDetal = attrs.center.x - centerX;
+                }
             }
-        }
-        return CGPointMake(proposedContentOffset.x + minDetal, proposedContentOffset.y);
-    }else{
-        // 计算 CollectionView 中点值
-        CGFloat centerY = proposedContentOffset.y + self.collectionView.frame.size.height * 0.5;
-        for (UICollectionViewLayoutAttributes *attrs in array){
-            if (ABS(minDetal) > ABS(centerY - attrs.center.y)){
-                minDetal = attrs.center.y - centerY;
+            return CGPointMake(proposedContentOffset.x + minDetal, proposedContentOffset.y);
+        }else{
+            // 计算 CollectionView 中点值
+            CGFloat centerY = proposedContentOffset.y + self.collectionView.frame.size.height * 0.5;
+            for (UICollectionViewLayoutAttributes *attrs in array){
+                if (ABS(minDetal) > ABS(centerY - attrs.center.y)){
+                    minDetal = attrs.center.y - centerY;
+                }
             }
+            return CGPointMake(proposedContentOffset.x, proposedContentOffset.y + minDetal);
         }
-        return CGPointMake(proposedContentOffset.x, proposedContentOffset.y + minDetal);
     }
+    
+    return proposedContentOffset;
     
 }
 

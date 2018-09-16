@@ -15,7 +15,6 @@
 #endif
 
 #import "WSLRollView.h"
-#import "WSLRollViewFlowLayout.h"
 
 @interface WSLRollViewCell ()
 @end
@@ -439,13 +438,14 @@
 - (void)setScrollStyle:(WSLRollViewScrollStyle)scrollStyle{
     _scrollStyle = scrollStyle;
     _collectionView.scrollEnabled = scrollStyle == WSLRollViewScrollStylePage ? YES : NO;
+    WSLRollViewFlowLayout * layout = (WSLRollViewFlowLayout *)_collectionView.collectionViewLayout;
+    layout.scrollStyle = scrollStyle;
 }
 
 - (void)setScrollDirection:(UICollectionViewScrollDirection)scrollDirection{
     _scrollDirection = scrollDirection;
     WSLRollViewFlowLayout * layout = (WSLRollViewFlowLayout *)_collectionView.collectionViewLayout;
     layout.scrollDirection = scrollDirection;
-    [_collectionView reloadData];
 }
 
 #pragma mark - Getter
@@ -456,6 +456,7 @@
         
         WSLRollViewFlowLayout * layout = [[WSLRollViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        layout.scrollStyle = WSLRollViewScrollStylePage;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0, self.frame.size.width, self.frame.size.height) collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor clearColor];
