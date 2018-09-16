@@ -84,7 +84,7 @@
 - (void)play{
     [self close];
     //如果速率或者时间间隔为0，表示不启用计时器
-    if(_interval == 0 || _speed == 0){
+    if(_interval == 0 || _speed == 0 || _loopEnabled == NO){
         _collectionView.scrollEnabled = YES;
         return;
     }

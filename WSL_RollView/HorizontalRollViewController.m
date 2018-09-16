@@ -59,6 +59,7 @@
     pageRollView.scrollStyle = WSLRollViewScrollStylePage;
     pageRollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     pageRollView.interval = 2;
+    pageRollView.loopEnabled = YES;
     pageRollView.delegate = self;
     [pageRollView registerClass:[WSLRollViewHorizontalCell class] forCellWithReuseIdentifier:@"PageRollID"];
     [self.view addSubview:pageRollView];
@@ -69,6 +70,7 @@
     stepRollView.backgroundColor = [UIColor blackColor];
     stepRollView.scrollStyle = WSLRollViewScrollStyleStep;
     stepRollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    stepRollView.loopEnabled = YES;
     stepRollView.speed = 120;
     stepRollView.delegate = self;
     [stepRollView registerClass:[WSLRollViewHorizontalCell class] forCellWithReuseIdentifier:@"StepRollID"];
