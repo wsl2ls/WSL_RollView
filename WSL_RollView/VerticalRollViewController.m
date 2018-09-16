@@ -91,7 +91,7 @@
 //返回itemSize
 - (CGSize)rollView:(WSLRollView *)rollView sizeForItemAtIndex:(NSInteger)index{
     if (rollView.scrollStyle == WSLRollViewScrollStylePage){
-        return CGSizeMake(SCREEN_WIDTH, KRollViewHeight);
+        return CGSizeMake(SCREEN_WIDTH, 150);
     }else{
         NSNumber * width = _array[index][@"width"];
         NSNumber * height = _array[index][@"height"];

@@ -83,16 +83,17 @@
 }
 
 - (void)play{
+    [self close];
     //如果速率或者时间间隔为0，表示不启用计时器
     if(_interval == 0 || _speed == 0){
         _collectionView.scrollEnabled = YES;
         return;
     }
-    [self close];
+    
     if(_scrollStyle == WSLRollViewScrollStylePage){
         _timer = [NSTimer scheduledTimerWithTimeInterval:_interval target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
-    }else{
+    }else if(_scrollStyle == WSLRollViewScrollStyleStep){
         _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
     }
@@ -152,9 +153,19 @@
  计时器任务
  */
 - (void)timerEvent{
+    
     if(self.scrollDirection == UICollectionViewScrollDirectionHorizontal){
+        //如果不够一屏就停止滚动效果
+        if (_collectionView.contentSize.width < self.frame.size.width) {
+            [self close];
+            return;
+        }
         [self horizontalRollAnimation];
     }else{
+        if (_collectionView.contentSize.height < self.frame.size.height) {
+            [self close];
+            return;
+        }
         [self verticalRollAnimation];
     }
 }
@@ -255,12 +266,8 @@
         return;
     }
     
-    if(_scrollDirection == UICollectionViewScrollDirectionHorizontal){
-        if (_collectionView.contentSize.width < self.frame.size.width){
-            //如果不够一屏就停止滚动效果
-            [self close];
-            return ;
-        }
+    if(_scrollDirection == UICollectionViewScrollDirectionHorizontal && _collectionView.contentSize.width >= self.frame.size.width){
+
         //用于右侧连接元素数量
         _addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(self.frame.size.width - 1, 0)].row + 1 ;
         if (_scrollStyle == WSLRollViewScrollStylePage){
@@ -269,11 +276,6 @@
         }
     }else if(_scrollDirection == UICollectionViewScrollDirectionVertical){
         
-        if (_collectionView.contentSize.height < self.frame.size.height){
-            //如果不够一屏就停止滚动效果
-            [self close];
-            return ;
-        }
         //用于右侧连接元素数量
         _addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(0, self.frame.size.height - 1)].row + 1 ;
         if (_scrollStyle == WSLRollViewScrollStylePage){
