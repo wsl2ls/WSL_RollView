@@ -274,7 +274,7 @@
             //如果是分页，还需要用于左侧连接元素数量
             _addLeftCount = _sourceArray.count - [_collectionView  indexPathForItemAtPoint:CGPointMake(_collectionView.contentSize.width - self.frame.size.width + 1, 0)].row;
         }
-    }else if(_scrollDirection == UICollectionViewScrollDirectionVertical){
+    }else if(_scrollDirection == UICollectionViewScrollDirectionVertical && _collectionView.contentSize.height >= self.frame.size.height){
         
         //用于右侧连接元素数量
         _addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(0, self.frame.size.height - 1)].row + 1 ;
