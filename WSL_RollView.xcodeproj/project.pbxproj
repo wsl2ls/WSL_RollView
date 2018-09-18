@@ -18,7 +18,6 @@
 		3101BD32213E604D00589B36 /* VerticalRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3101BD31213E604D00589B36 /* VerticalRollViewController.m */; };
 		31ABBA1D2143A223007E004F /* WSLRollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31ABBA1C2143A223007E004F /* WSLRollView.m */; };
 		31B863F02144EDE900B4CDD7 /* HorizontalRollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B863EF2144EDE900B4CDD7 /* HorizontalRollViewController.m */; };
-		31F9894E214B573A00E93F67 /* WSLRollViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F9894D214B573A00E93F67 /* WSLRollViewFlowLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,8 +61,6 @@
 		31ABBA1C2143A223007E004F /* WSLRollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSLRollView.m; sourceTree = "<group>"; };
 		31B863EE2144EDE900B4CDD7 /* HorizontalRollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HorizontalRollViewController.h; sourceTree = "<group>"; };
 		31B863EF2144EDE900B4CDD7 /* HorizontalRollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HorizontalRollViewController.m; sourceTree = "<group>"; };
-		31F9894C214B573A00E93F67 /* WSLRollViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WSLRollViewFlowLayout.h; sourceTree = "<group>"; };
-		31F9894D214B573A00E93F67 /* WSLRollViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WSLRollViewFlowLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +118,6 @@
 				3101BD02213E5A7A00589B36 /* ViewController.m */,
 				31ABBA1B2143A223007E004F /* WSLRollView.h */,
 				31ABBA1C2143A223007E004F /* WSLRollView.m */,
-				31F9894C214B573A00E93F67 /* WSLRollViewFlowLayout.h */,
-				31F9894D214B573A00E93F67 /* WSLRollViewFlowLayout.m */,
 				31B863EE2144EDE900B4CDD7 /* HorizontalRollViewController.h */,
 				31B863EF2144EDE900B4CDD7 /* HorizontalRollViewController.m */,
 				3101BD30213E604C00589B36 /* VerticalRollViewController.h */,
@@ -287,7 +282,6 @@
 				3101BD03213E5A7A00589B36 /* ViewController.m in Sources */,
 				31B863F02144EDE900B4CDD7 /* HorizontalRollViewController.m in Sources */,
 				3101BD32213E604D00589B36 /* VerticalRollViewController.m in Sources */,
-				31F9894E214B573A00E93F67 /* WSLRollViewFlowLayout.m in Sources */,
 				3101BD0E213E5A7C00589B36 /* main.m in Sources */,
 				31ABBA1D2143A223007E004F /* WSLRollView.m in Sources */,
 				3101BD00213E5A7A00589B36 /* AppDelegate.m in Sources */,

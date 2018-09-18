@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WSLRollViewFlowLayout.h"
+//#import "WSLRollViewFlowLayout.h"
 
 /**
  默认cell样式 WSLItemID
@@ -42,6 +42,13 @@
 - (WSLRollViewCell *)rollView:(WSLRollView *)rollView cellForItemAtIndex:(NSInteger )index;
 @end
 
+/**
+ 滚动样式
+ */
+typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
+    WSLRollViewScrollStylePage = 0, /** 分页 必须等宽或高*/
+    WSLRollViewScrollStyleStep   /** 渐进 可以不等宽或高*/
+};
 
 @interface WSLRollView : UIView
 
