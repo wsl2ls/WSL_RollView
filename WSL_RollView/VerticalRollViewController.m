@@ -122,6 +122,11 @@
     WSL_Log(@" 点击了 %ld",index);
 }
 
+//当前页码
+- (void)rollView:(WSLRollView *)rollView didRollItemToIndex:(NSInteger)currentIndex{
+    WSL_Log(@"当前页码 %ld",currentIndex);
+}
+
 //返回自定义cell样式
 -(WSLRollViewCell *)rollView:(WSLRollView *)rollView cellForItemAtIndex:(NSInteger)index{
     

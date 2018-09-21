@@ -175,31 +175,70 @@
     [self addSubview:self.collectionView];
 }
 
-- (void)pause{
-    [self close];
-}
-
-- (void)play{
-    [self close];
-    //如果速率或者时间间隔为0，表示不启用计时器
-    if(_interval == 0 || _speed == 0 || _loopEnabled == NO){
-        _collectionView.scrollEnabled = YES;
+//获取首尾相连循环滚动时需要用到的元素，并重组数据源
+- (void)resetDataSourceForLoop{
+    
+    if(_loopEnabled == NO){
         return;
     }
     
-    if(_scrollStyle == WSLRollViewScrollStylePage){
-        _timer = [NSTimer scheduledTimerWithTimeInterval:_interval target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
-    }else if(_scrollStyle == WSLRollViewScrollStyleStep){
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+    if(_scrollDirection == UICollectionViewScrollDirectionHorizontal && _collectionView.contentSize.width >= self.frame.size.width){
+        
+        //用于右侧连接元素数量
+        _addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(self.frame.size.width - 1, 0)].row + 1 ;
+        if (_scrollStyle == WSLRollViewScrollStylePage){
+            //如果是分页，还需要用于左侧连接元素数量
+            _addLeftCount = _sourceArray.count - [_collectionView  indexPathForItemAtPoint:CGPointMake(_collectionView.contentSize.width - self.frame.size.width + 1, 0)].row;
+        }
+    }else if(_scrollDirection == UICollectionViewScrollDirectionVertical && _collectionView.contentSize.height >= self.frame.size.height){
+        
+        //用于右侧连接元素数量
+        _addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(0, self.frame.size.height - 1)].row + 1 ;
+        if (_scrollStyle == WSLRollViewScrollStylePage){
+            //用于左侧连接元素数量
+            _addLeftCount = _sourceArray.count - [_collectionView  indexPathForItemAtPoint:CGPointMake(0, _collectionView.contentSize.height - self.frame.size.height + 1)].row;
+        }
     }
+    
+    NSArray * rightSubArray = [_sourceArray subarrayWithRange:NSMakeRange(0, _addRightCount)];
+    //增加右侧连接元素
+    [_dataSource addObjectsFromArray:rightSubArray];
+    
+    if (_scrollStyle == WSLRollViewScrollStylePage){
+        NSArray * leftSubArray = [_sourceArray subarrayWithRange:NSMakeRange(_sourceArray.count - _addLeftCount, _addLeftCount)];
+        //增加左侧连接元素
+        [_dataSource insertObjects:leftSubArray atIndexes: [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,_addLeftCount)]];
+    }
+    
 }
 
-- (void)close{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
-    [_timer invalidate];
-    _timer = nil;
+//刷新
+- (void)reloadData{
+    
+    [_dataSource removeAllObjects];
+    _dataSource = [NSMutableArray arrayWithArray:_sourceArray];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.collectionView performBatchUpdates:^{
+        //刷新操作
+    } completion:^(BOOL finished) {
+        //刷新完成，其他操作
+        if(finished){
+            
+            [weakSelf resetDataSourceForLoop];
+            [weakSelf.collectionView reloadData];
+            
+            if (weakSelf.scrollStyle == WSLRollViewScrollStylePage && weakSelf.addLeftCount != 0) {
+                [weakSelf.collectionView layoutIfNeeded];
+                dispatch_async(dispatch_get_main_queue(),^{
+                    [weakSelf rollToIndex:0];
+                });
+            }
+            
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
+            [self performSelector:@selector(play) withObject:nil afterDelay:0.6];
+        }
+    }];
 }
 
 //根据处理后的数据源的索引row 返回原数据的索引index
@@ -230,6 +269,25 @@
         }else{
             [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:[self rowOfDataSource:index] inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
         }
+        if ([self.delegate respondsToSelector:@selector(rollView:didRollItemToIndex:)]) {
+            [self.delegate rollView:self didRollItemToIndex:index];
+        }
+    }
+}
+
+//获得当前页码  只针对分页效果
+- (void)getCurrentIndex{
+    
+    if (_scrollStyle == WSLRollViewScrollStylePage){
+        NSInteger currentIndex= 0;
+        if(_scrollDirection == UICollectionViewScrollDirectionHorizontal){
+            currentIndex= [_collectionView indexPathForItemAtPoint:CGPointMake(_collectionView.contentOffset.x + self.frame.size.width/2, 0)].row;
+        }else{
+            currentIndex= [_collectionView indexPathForItemAtPoint:CGPointMake(0,_collectionView.contentOffset.y + self.frame.size.height/2)].row;
+        }
+        if ([self.delegate respondsToSelector:@selector(rollView:didRollItemToIndex:)]) {
+            [self.delegate rollView:self didRollItemToIndex:[self indexOfSourceArray:currentIndex]];
+        }
     }
 }
 
@@ -245,6 +303,35 @@
 }
 
 #pragma mark - Event Handle
+
+- (void)pause{
+    [self close];
+}
+
+- (void)play{
+    [self close];
+    //如果速率或者时间间隔为0，表示不启用计时器
+    if(_interval == 0 || _speed == 0 || _loopEnabled == NO){
+        _collectionView.scrollEnabled = YES;
+        return;
+    }
+    
+    if(_scrollStyle == WSLRollViewScrollStylePage){
+        _timer = [NSTimer scheduledTimerWithTimeInterval:_interval target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+    }else if(_scrollStyle == WSLRollViewScrollStyleStep){
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+    }
+}
+
+- (void)close{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
+    if(_timer != nil){
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
 
 /**
  计时器任务
@@ -312,14 +399,15 @@
  */
 - (void)resetContentOffset{
     
-    //只有当IndexPath位置上的cell可见时，才能用如下方法获取到对应的cell，否则为nil
-    WSLRollViewCell * item = (WSLRollViewCell *)[_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_dataSource.count - (self.addRightCount) inSection:0]];
-    //获取轮播首尾相连的交汇点位置坐标
-    _connectionPoint = [_collectionView convertRect:item.frame toView:_collectionView].origin;
-    //    WSL_Log(@"轮播首尾相连的交汇点位置坐标: %@", NSStringFromCGPoint(_connectionPoint));
+    if (self.scrollStyle == WSLRollViewScrollStyleStep){
+        //只有当IndexPath位置上的cell可见时，才能用如下方法获取到对应的cell，否则为nil
+        WSLRollViewCell * item = (WSLRollViewCell *)[_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:_dataSource.count - (self.addRightCount) inSection:0]];
+        //获取渐进轮播首尾相连的交汇点位置坐标
+        _connectionPoint = [_collectionView convertRect:item.frame toView:_collectionView].origin;
+    }
     
     if(self.scrollDirection == UICollectionViewScrollDirectionHorizontal){
-        
+        //水平
         if (self.scrollStyle == WSLRollViewScrollStylePage) {
             NSInteger currentMiddleIndex = [_collectionView indexPathForItemAtPoint:CGPointMake(_collectionView.contentOffset.x + self.frame.size.width/2, 0)].row;
             if (currentMiddleIndex >= _sourceArray.count + _addLeftCount) {
@@ -337,7 +425,7 @@
         }
         
     }else{
-        
+        //垂直
         if (self.scrollStyle == WSLRollViewScrollStylePage) {
             NSInteger currentMiddleIndex = [_collectionView indexPathForItemAtPoint:CGPointMake(0, _collectionView.contentOffset.y + self.frame.size.height/2)].row;
             if (currentMiddleIndex >= _sourceArray.count + _addLeftCount) {
@@ -354,72 +442,6 @@
             }
         }
     }
-}
-
-//获取首尾相连循环滚动时需要用到的元素，并重组数据源
-- (void)resetDataSourceForLoop{
-    
-    if(_loopEnabled == NO){
-        return;
-    }
-    
-    if(_scrollDirection == UICollectionViewScrollDirectionHorizontal && _collectionView.contentSize.width >= self.frame.size.width){
-        
-        //用于右侧连接元素数量
-        _addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(self.frame.size.width - 1, 0)].row + 1 ;
-        if (_scrollStyle == WSLRollViewScrollStylePage){
-            //如果是分页，还需要用于左侧连接元素数量
-            _addLeftCount = _sourceArray.count - [_collectionView  indexPathForItemAtPoint:CGPointMake(_collectionView.contentSize.width - self.frame.size.width + 1, 0)].row;
-        }
-    }else if(_scrollDirection == UICollectionViewScrollDirectionVertical && _collectionView.contentSize.height >= self.frame.size.height){
-        
-        //用于右侧连接元素数量
-        _addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(0, self.frame.size.height - 1)].row + 1 ;
-        if (_scrollStyle == WSLRollViewScrollStylePage){
-            //用于左侧连接元素数量
-            _addLeftCount = _sourceArray.count - [_collectionView  indexPathForItemAtPoint:CGPointMake(0, _collectionView.contentSize.height - self.frame.size.height + 1)].row;
-        }
-    }
-    
-    NSArray * rightSubArray = [_sourceArray subarrayWithRange:NSMakeRange(0, _addRightCount)];
-    //增加右侧连接元素
-    [_dataSource addObjectsFromArray:rightSubArray];
-    
-    if (_scrollStyle == WSLRollViewScrollStylePage){
-        NSArray * leftSubArray = [_sourceArray subarrayWithRange:NSMakeRange(_sourceArray.count - _addLeftCount, _addLeftCount)];
-        //增加左侧连接元素
-        [_dataSource insertObjects:leftSubArray atIndexes: [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,_addLeftCount)]];
-    }
-    
-}
-
-//刷新
-- (void)reloadData{
-    
-    [_dataSource removeAllObjects];
-    _dataSource = [NSMutableArray arrayWithArray:_sourceArray];
-    
-    __weak typeof(self) weakSelf = self;
-    [self.collectionView performBatchUpdates:^{
-        //刷新操作
-    } completion:^(BOOL finished) {
-        //刷新完成，其他操作
-        if(finished){
-            
-            [weakSelf resetDataSourceForLoop];
-            [weakSelf.collectionView reloadData];
-            
-            if (weakSelf.scrollStyle == WSLRollViewScrollStylePage && weakSelf.addLeftCount != 0) {
-                [weakSelf.collectionView layoutIfNeeded];
-                dispatch_async(dispatch_get_main_queue(),^{
-                    [weakSelf rollToIndex:0];
-                });
-            }
-            
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
-            [self performSelector:@selector(play) withObject:nil afterDelay:0.6];
-        }
-    }];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -450,11 +472,13 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self resetContentOffset];
     [self play];
+    [self getCurrentIndex];
 }
 
 //设置偏移量的动画结束之后
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     [self resetContentOffset];
+    [self getCurrentIndex];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

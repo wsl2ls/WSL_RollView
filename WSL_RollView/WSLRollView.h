@@ -37,6 +37,10 @@
  */
 - (void)rollView:(WSLRollView *)rollView didSelectItemAtIndex:(NSInteger)index;
 /**
+ 获取当前页码 只针对于分页效果
+ */
+- (void)rollView:(WSLRollView *)rollView didRollItemToIndex:(NSInteger)currentIndex;
+/**
  自定义item样式
  */
 - (WSLRollViewCell *)rollView:(WSLRollView *)rollView cellForItemAtIndex:(NSInteger )index;
@@ -58,7 +62,7 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
 @property (nonatomic, strong) NSMutableArray * sourceArray;
 
 /**
- 是否循环轮播 默认YES
+ 是否循环轮播 默认YES 如果NO，则自动禁止计时器
  */
 @property (nonatomic, assign) BOOL loopEnabled;
 
@@ -95,7 +99,7 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
 @property (nonatomic, weak) id<WSLRollViewDelegate> delegate;
 
 /**
-  初始化方法 direction 滚动方向
+ 初始化方法 direction 滚动方向
  */
 - (instancetype)initWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection)direction;
 
