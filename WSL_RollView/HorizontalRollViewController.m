@@ -79,7 +79,7 @@
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewDidDisappear:(BOOL)animated{
     for (UIView * view in self.view.subviews) {
         if ([view isKindOfClass:[WSLRollView class]]) {
             [(WSLRollView *)view close];

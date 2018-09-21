@@ -305,11 +305,20 @@
 #pragma mark - Event Handle
 
 - (void)pause{
-    [self close];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
+    if(_timer != nil){
+        [_timer invalidate];
+        _timer = nil;
+    }
 }
 
 - (void)play{
-    [self close];
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
+    if(_timer != nil){
+        [_timer invalidate];
+        _timer = nil;
+    }
     //如果速率或者时间间隔为0，表示不启用计时器
     if(_interval == 0 || _speed == 0 || _loopEnabled == NO){
         _collectionView.scrollEnabled = YES;
@@ -318,10 +327,10 @@
     
     if(_scrollStyle == WSLRollViewScrollStylePage){
         _timer = [NSTimer scheduledTimerWithTimeInterval:_interval target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+//        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
     }else if(_scrollStyle == WSLRollViewScrollStyleStep){
         _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+//        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
     }
 }
 
@@ -331,6 +340,10 @@
         [_timer invalidate];
         _timer = nil;
     }
+    for (UIView * subView in self.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self removeFromSuperview];
 }
 
 /**
@@ -341,13 +354,13 @@
     if(self.scrollDirection == UICollectionViewScrollDirectionHorizontal){
         //如果不够一屏就停止滚动效果
         if (_collectionView.contentSize.width < self.frame.size.width) {
-            [self close];
+            [self pause];
             return;
         }
         [self horizontalRollAnimation];
     }else{
         if (_collectionView.contentSize.height < self.frame.size.height) {
-            [self close];
+            [self pause];
             return;
         }
         [self verticalRollAnimation];
