@@ -74,14 +74,6 @@
     [stepRollView reloadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    for (UIView * view in self.view.subviews) {
-        if ([view isKindOfClass:[WSLRollView class]]) {
-            [(WSLRollView *)view close];
-        }
-    }
-}
-
 - (void)dealloc{
     WSL_Log(@"WSLRollView计时器已释放");
 }

@@ -305,20 +305,12 @@
 #pragma mark - Event Handle
 
 - (void)pause{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
-    if(_timer != nil){
-        [_timer invalidate];
-        _timer = nil;
-    }
+    [self invalidateTimer];
 }
 
 - (void)play{
     
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
-    if(_timer != nil){
-        [_timer invalidate];
-        _timer = nil;
-    }
+     [self invalidateTimer];
     //如果速率或者时间间隔为0，表示不启用计时器
     if(_interval == 0 || _speed == 0 || _loopEnabled == NO){
         _collectionView.scrollEnabled = YES;
@@ -327,23 +319,37 @@
     
     if(_scrollStyle == WSLRollViewScrollStylePage){
         _timer = [NSTimer scheduledTimerWithTimeInterval:_interval target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
-//        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
     }else if(_scrollStyle == WSLRollViewScrollStyleStep){
         _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
-//        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:UITrackingRunLoopMode];
     }
 }
 
 - (void)close{
+    [self invalidateTimer];
+    for (UIView * subView in self.subviews) {
+        [subView removeFromSuperview];
+    }
+    [self removeFromSuperview];
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if (!newSuperview && _timer) {
+        // 销毁定时器
+        [self close];
+    }
+}
+/**
+ 释放计时器 必须执行，防止内存暴涨
+ */
+- (void)invalidateTimer{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
     if(_timer != nil){
         [_timer invalidate];
         _timer = nil;
     }
-    for (UIView * subView in self.subviews) {
-        [subView removeFromSuperview];
-    }
-    [self removeFromSuperview];
 }
 
 /**

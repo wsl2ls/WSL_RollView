@@ -128,10 +128,5 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
  继续自动轮播
  */
 - (void)play;
-/**
- 释放计时器 必须执行，防止内存暴涨
- */
-- (void)close;
-
 
 @end
