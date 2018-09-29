@@ -35,7 +35,7 @@
 
 @interface VerticalRollViewController ()<WSLRollViewDelegate>
 {
-    NSArray * _array;
+    NSMutableArray * _array;
 }
 @end
 
@@ -46,10 +46,10 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"垂直滚动";
-    _array = @[
-               @{@"title":@"0",@"color":RGBRANDOMCOLOR,@"height":@(arc4random()%(int)(KRollViewHeight)),@"width":@(SCREEN_WIDTH)},
-               @{@"title":@"1",@"color":RGBRANDOMCOLOR,@"height":@(arc4random()%(int)(KRollViewHeight)),@"width":@(SCREEN_WIDTH)},
-               @{@"title":@"2",@"color":RGBRANDOMCOLOR,@"height":@(arc4random()%(int)(KRollViewHeight)),@"width":@(SCREEN_WIDTH)}];
+    _array = [NSMutableArray array];
+    for (int i = 0 ; i < 3; i++) {
+        [_array addObject:@{@"title":[NSString stringWithFormat:@"第%d页",i],@"color":RGBRANDOMCOLOR,@"height":@(arc4random()%(int)(KRollViewHeight)),@"width":@(SCREEN_WIDTH)}];
+    }
     
     WSLRollView * pageRollView = [[WSLRollView alloc] initWithFrame:CGRectMake(0,StatusBarAndNavigationBarHeight + 50 , SCREEN_WIDTH, KRollViewHeight)];
     pageRollView.sourceArray = [NSMutableArray arrayWithArray:_array];
