@@ -16,6 +16,9 @@
 
 #import "WSLRollView.h"
 
+/**
+  默认样式
+ */
 @interface WSLRollViewCell ()
 @end
 @implementation WSLRollViewCell
@@ -118,6 +121,72 @@
 }
 
 @end
+
+//临时弱引用对象，解决循环引用的问题  引自 YYWeakProxy
+@interface WSLWeakProxy : NSProxy <NSObject>
+/**
+ The proxy target.
+ */
+@property (nullable, nonatomic, weak, readonly) id target;
+
+@end
+
+@implementation WSLWeakProxy
+
++ (instancetype)proxyWithTarget:(id)target {
+    return [[WSLWeakProxy alloc] initWithTarget:target];
+}
+- (instancetype)initWithTarget:(id)target {
+    _target = target;
+    return self;
+}
+//将消息接收对象改为 _target
+- (id)forwardingTargetForSelector:(SEL)selector {
+    return _target;
+}
+//self 对 target 是弱引用，一旦 target 被释放将调用下面两个方法，如果不实现的话会 crash
+- (void)forwardInvocation:(NSInvocation *)invocation {
+    void *null = NULL;
+    [invocation setReturnValue:&null];
+}
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
+    return [NSObject instanceMethodSignatureForSelector:@selector(init)];
+}
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    return [_target respondsToSelector:aSelector];
+}
+- (BOOL)isEqual:(id)object {
+    return [_target isEqual:object];
+}
+- (NSUInteger)hash {
+    return [_target hash];
+}
+- (Class)superclass {
+    return [_target superclass];
+}
+- (Class)class {
+    return [_target class];
+}
+- (BOOL)isKindOfClass:(Class)aClass {
+    return [_target isKindOfClass:aClass];
+}
+- (BOOL)isMemberOfClass:(Class)aClass {
+    return [_target isMemberOfClass:aClass];
+}
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    return [_target conformsToProtocol:aProtocol];
+}
+- (BOOL)isProxy {
+    return YES;
+}
+- (NSString *)description {
+    return [_target description];
+}
+- (NSString *)debugDescription {
+    return [_target debugDescription];
+}
+@end
+
 
 @interface WSLRollView ()<UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate>
 
@@ -304,10 +373,10 @@
     }
     
     if(_scrollStyle == WSLRollViewScrollStylePage){
-        _timer = [NSTimer scheduledTimerWithTimeInterval:_interval target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:_interval target:[WSLWeakProxy proxyWithTarget:self] selector:@selector(timerEvent) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }else if(_scrollStyle == WSLRollViewScrollStyleStep){
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0/60 target:[WSLWeakProxy proxyWithTarget:self] selector:@selector(timerEvent) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
     }
 }
