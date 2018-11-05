@@ -396,6 +396,14 @@
         [self close];
     }
 }
+
+- (void)didMoveToSuperview{
+      [super didMoveToSuperview];
+    if (self.superview) {
+        [self reloadData];
+    }
+}
+
 /**
  释放计时器 必须执行，防止内存暴涨
  */
