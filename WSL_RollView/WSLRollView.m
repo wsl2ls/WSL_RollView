@@ -212,6 +212,7 @@
     if (self == [super initWithFrame:frame]) {
         _scrollStyle = WSLRollViewScrollStylePage;
         _scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _startingPosition = 0;
         _speed = 60;
         _interval = 3.0;
         _spaceOfItem = 0;
@@ -225,6 +226,7 @@
 - (instancetype)initWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection)direction{
     if (self == [super initWithFrame:frame]) {
         _scrollStyle = WSLRollViewScrollStylePage;
+        _startingPosition = 0;
         _scrollDirection = direction;
         _speed = 60;
         _interval = 3.0;
@@ -430,10 +432,13 @@
     [self resetDataSourceForLoop];
     [self.collectionView reloadData];
     
-    if (self.scrollStyle == WSLRollViewScrollStylePage && self.addLeftCount != 0) {
+    if (self.scrollStyle == WSLRollViewScrollStylePage) {
         //        [self.collectionView layoutIfNeeded];
         //        dispatch_async(dispatch_get_main_queue(),^{
-        [self rollToIndex:0];
+        if (_startingPosition >= _sourceArray.count || _startingPosition < 0) {
+            _startingPosition = 0;
+        }
+        [self rollToIndex:_startingPosition];
         //        });
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];

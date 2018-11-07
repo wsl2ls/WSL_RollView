@@ -59,11 +59,11 @@
     pageRollView.scrollStyle = WSLRollViewScrollStylePage;
     pageRollView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     pageRollView.interval = 2;
+    pageRollView.startingPosition = 1;
     pageRollView.loopEnabled = YES;
     pageRollView.delegate = self;
     [pageRollView registerClass:[WSLRollViewHorizontalCell class] forCellWithReuseIdentifier:@"PageRollID"];
     [self.view addSubview:pageRollView];
-//    [pageRollView reloadData];
     
     WSLRollView * stepRollView = [[WSLRollView alloc] initWithFrame:CGRectMake(0,pageRollView.frame.origin.y + KRollViewHeight + 50, SCREEN_WIDTH, KRollViewHeight)];
     stepRollView.sourceArray = [NSMutableArray arrayWithArray:_array];
@@ -75,7 +75,6 @@
     stepRollView.delegate = self;
     [stepRollView registerClass:[WSLRollViewHorizontalCell class] forCellWithReuseIdentifier:@"StepRollID"];
     [self.view addSubview:stepRollView];
-//    [stepRollView reloadData];
     
 }
 

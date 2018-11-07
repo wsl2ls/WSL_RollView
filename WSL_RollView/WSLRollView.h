@@ -36,7 +36,7 @@
  */
 - (void)rollView:(WSLRollView *)rollView didSelectItemAtIndex:(NSInteger)index;
 /**
- 获取当前页码 只针对于分页效果
+ 翻页完成的回调 只针对于分页效果
  */
 - (void)rollView:(WSLRollView *)rollView didRollItemToIndex:(NSInteger)currentIndex;
 /**
@@ -74,6 +74,10 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
  轮播样式 默认是 WSLRollViewScrollStylePage 分页
  */
 @property (nonatomic, assign) WSLRollViewScrollStyle scrollStyle;
+/**
+ 设置初始化时的位置页码，默认为0 只对分页效果有效
+ */
+@property (nonatomic, assign) NSInteger startingPosition;
 
 /**
  渐进轮播速率 单位是Point/s，以坐标系单位为准 默认60/s 如果为0 表示禁止计时器
