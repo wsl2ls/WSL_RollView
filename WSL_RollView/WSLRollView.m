@@ -356,6 +356,10 @@
 - (WSLRollViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndex:(NSInteger)index{
     return [_collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
+- (WSLRollViewCell *)cellForItemAtIndexPath:(NSInteger)index{
+    return (WSLRollViewCell *)[_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+}
+
 
 #pragma mark - Event Handle
 

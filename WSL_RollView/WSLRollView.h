@@ -111,9 +111,11 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
  */
 - (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
 /**
- 用于初始化和获取WSLRollViewCell，自定义cell样式 用法和UICollectionView相似
+ 用于初始化WSLRollViewCell，自定义cell样式 用法和UICollectionView相似
  */
 - (WSLRollViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndex:(NSInteger)index;
+//返回索引为index的cell
+- (WSLRollViewCell *)cellForItemAtIndexPath:(NSInteger)index;
 
 /**
  刷新数据源
