@@ -560,6 +560,10 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
+    if (!_loopEnabled) {
+        return;
+    }
+    
     if ((scrollView.contentOffset.x < 1 || scrollView.contentOffset.x > scrollView.contentSize.width - self.frame.size.width - 1) && _scrollDirection == UICollectionViewScrollDirectionHorizontal) {
         [self resetContentOffset];
     }else if ((scrollView.contentOffset.y < 1 || scrollView.contentOffset.y > scrollView.contentSize.height - self.frame.size.height - 1) && _scrollDirection == UICollectionViewScrollDirectionVertical){
@@ -575,21 +579,25 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
-    if (decelerate == NO) {
+    if (decelerate == NO && _loopEnabled) {
         [self resetContentOffset];
     }
 }
 
 //拖拽之后减速完成
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self resetContentOffset];
-    [self play];
+    if (_loopEnabled) {
+        [self resetContentOffset];
+        [self play];
+    }
     [self getCurrentIndex];
 }
 
 //设置偏移量的动画结束之后
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [self resetContentOffset];
+    if (_loopEnabled) {
+        [self resetContentOffset];
+    }
     [self getCurrentIndex];
 }
 
