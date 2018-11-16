@@ -64,6 +64,14 @@
     pageRollView.delegate = self;
     [pageRollView registerClass:[WSLRollViewHorizontalCell class] forCellWithReuseIdentifier:@"PageRollID"];
     [self.view addSubview:pageRollView];
+
+    //GCD延迟
+//   NSMutableArray * array = [NSMutableArray arrayWithArray:_array];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        pageRollView.sourceArray = array;
+//        [pageRollView reloadData];
+//    });
+    
     
     WSLRollView * stepRollView = [[WSLRollView alloc] initWithFrame:CGRectMake(0,pageRollView.frame.origin.y + KRollViewHeight + 50, SCREEN_WIDTH, KRollViewHeight)];
     stepRollView.sourceArray = [NSMutableArray arrayWithArray:_array];

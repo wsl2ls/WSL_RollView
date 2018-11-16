@@ -432,6 +432,10 @@
     [self resetDataSourceForLoop];
     [self.collectionView reloadData];
     
+    if (_sourceArray.count == 0) {
+        return;
+    }
+    
     if (self.scrollStyle == WSLRollViewScrollStylePage) {
         [self.collectionView layoutIfNeeded];
         __weak typeof(self) weakSelf = self;
