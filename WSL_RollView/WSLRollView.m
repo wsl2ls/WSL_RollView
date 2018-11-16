@@ -433,13 +433,14 @@
     [self.collectionView reloadData];
     
     if (self.scrollStyle == WSLRollViewScrollStylePage) {
-        //        [self.collectionView layoutIfNeeded];
-        //        dispatch_async(dispatch_get_main_queue(),^{
-        if (_startingPosition >= _sourceArray.count || _startingPosition < 0) {
-            _startingPosition = 0;
-        }
-        [self rollToIndex:_startingPosition];
-        //        });
+        [self.collectionView layoutIfNeeded];
+        __weak typeof(self) weakSelf = self;
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (weakSelf.startingPosition >= weakSelf.sourceArray.count || weakSelf.startingPosition < 0) {
+                weakSelf.startingPosition = 0;
+            }
+            [weakSelf rollToIndex:weakSelf.startingPosition];
+        });
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(play) object:nil];
     [self performSelector:@selector(play) withObject:nil afterDelay:0.6];
