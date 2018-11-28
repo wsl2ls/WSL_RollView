@@ -218,6 +218,7 @@
         _spaceOfItem = 0;
         _padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _loopEnabled = YES;
+        _scrollEnabled = YES;
         [self setupUi];
     }
     return self;
@@ -233,6 +234,7 @@
         _spaceOfItem = 0;
         _padding = UIEdgeInsetsMake(0, 0, 0, 0);
         _loopEnabled = YES;
+        _scrollEnabled = YES;
         [self setupUi];
     }
     return self;
