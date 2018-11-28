@@ -374,7 +374,7 @@
     [self invalidateTimer];
     //如果速率或者时间间隔为0，表示不启用计时器
     if(_interval == 0 || _speed == 0 || _loopEnabled == NO){
-        _collectionView.scrollEnabled = YES;
+        _collectionView.scrollEnabled = self.scrollEnabled;
         return;
     }
     
@@ -684,7 +684,6 @@
 
 - (void)setScrollStyle:(WSLRollViewScrollStyle)scrollStyle{
     _scrollStyle = scrollStyle;
-    _collectionView.scrollEnabled = scrollStyle == WSLRollViewScrollStylePage ? YES : NO;
     WSLRollViewFlowLayout * layout = (WSLRollViewFlowLayout *)_collectionView.collectionViewLayout;
     layout.scrollStyle = scrollStyle;
 }
@@ -693,6 +692,10 @@
     _scrollDirection = scrollDirection;
     WSLRollViewFlowLayout * layout = (WSLRollViewFlowLayout *)_collectionView.collectionViewLayout;
     layout.scrollDirection = scrollDirection;
+}
+- (void)setScrollEnabled:(BOOL)scrollEnabled{
+    _scrollEnabled = scrollEnabled;
+    self.collectionView.scrollEnabled = scrollEnabled;
 }
 
 #pragma mark - Getter
@@ -716,7 +719,7 @@
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.decelerationRate = 0;
-        _collectionView.scrollEnabled = YES;
+        _collectionView.scrollEnabled = self.scrollEnabled;
         
     }
     return _collectionView;

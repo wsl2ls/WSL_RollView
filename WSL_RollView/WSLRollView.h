@@ -64,12 +64,14 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
  是否循环轮播 默认YES 如果NO，则自动禁止计时器
  */
 @property (nonatomic, assign) BOOL loopEnabled;
-
+/**
+ 是否允许滑动 默认YES
+ */
+@property (nonatomic, assign) BOOL scrollEnabled;
 /**
  轮播方向 默认是 UICollectionViewScrollDirectionHorizontal 水平
  */
 @property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;
-
 /**
  轮播样式 默认是 WSLRollViewScrollStylePage 分页
  */

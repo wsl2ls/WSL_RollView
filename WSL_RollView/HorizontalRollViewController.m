@@ -49,7 +49,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"水平滚动";
     _array = [NSMutableArray array];
-    for (int i = 0 ; i < 3; i++) {
+    for (int i = 0 ; i < 6; i++) {
         [_array addObject:@{@"title":[NSString stringWithFormat:@"第%d页",i],@"color":RGBRANDOMCOLOR,@"width":@(arc4random()%(int)(SCREEN_WIDTH)),@"height":@(KRollViewHeight)}];
     }
     
