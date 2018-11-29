@@ -569,6 +569,7 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+     [self getCurrentIndex];
     if (!_loopEnabled) {
         return;
     }
@@ -577,7 +578,6 @@
     }else if ((scrollView.contentOffset.y < 1 || scrollView.contentOffset.y > scrollView.contentSize.height - self.frame.size.height - 1) && _scrollDirection == UICollectionViewScrollDirectionVertical){
         [self resetContentOffset];
     }
-    [self getCurrentIndex];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
