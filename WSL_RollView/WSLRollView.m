@@ -17,7 +17,7 @@
 #import "WSLRollView.h"
 
 /**
-  默认样式
+ 默认样式
  */
 @interface WSLRollViewCell ()
 @end
@@ -204,6 +204,8 @@
 //轮播右侧首尾相连的交汇点位置坐标 只有渐进效果用到
 @property (nonatomic, assign) CGPoint connectionPoint;
 
+@property (nonatomic, assign) NSInteger currentPage;
+
 @end
 
 @implementation WSLRollView
@@ -336,7 +338,6 @@
 
 //获得当前页码  只针对分页效果
 - (void)getCurrentIndex{
-    
     if (_scrollStyle == WSLRollViewScrollStylePage){
         NSInteger currentIndex= 0;
         if(_scrollDirection == UICollectionViewScrollDirectionHorizontal){
@@ -344,8 +345,10 @@
         }else{
             currentIndex= [_collectionView indexPathForItemAtPoint:CGPointMake(0,_collectionView.contentOffset.y + self.frame.size.height/2)].row;
         }
-        if ([self.delegate respondsToSelector:@selector(rollView:didRollItemToIndex:)]) {
-            [self.delegate rollView:self didRollItemToIndex:[self indexOfSourceArray:currentIndex]];
+        NSInteger currentPage = [self indexOfSourceArray:currentIndex];
+        if ([self.delegate respondsToSelector:@selector(rollView:didRollItemToIndex:)] && _currentPage != currentPage) {
+            _currentPage = currentPage;
+            [self.delegate rollView:self didRollItemToIndex:_currentPage];
         }
     }
 }
@@ -406,7 +409,7 @@
 }
 
 - (void)didMoveToSuperview{
-      [super didMoveToSuperview];
+    [super didMoveToSuperview];
     if (self.superview) {
         [self reloadData];
     }
@@ -566,16 +569,15 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
     if (!_loopEnabled) {
         return;
     }
-    
     if ((scrollView.contentOffset.x < 1 || scrollView.contentOffset.x > scrollView.contentSize.width - self.frame.size.width - 1) && _scrollDirection == UICollectionViewScrollDirectionHorizontal) {
         [self resetContentOffset];
     }else if ((scrollView.contentOffset.y < 1 || scrollView.contentOffset.y > scrollView.contentSize.height - self.frame.size.height - 1) && _scrollDirection == UICollectionViewScrollDirectionVertical){
         [self resetContentOffset];
     }
+    [self getCurrentIndex];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
@@ -597,7 +599,6 @@
         [self resetContentOffset];
         [self play];
     }
-    [self getCurrentIndex];
 }
 
 //设置偏移量的动画结束之后
@@ -605,7 +606,6 @@
     if (_loopEnabled) {
         [self resetContentOffset];
     }
-    [self getCurrentIndex];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -703,9 +703,7 @@
 #pragma mark - Getter
 
 - (UICollectionView *)collectionView{
-    
     if (_collectionView == nil) {
-        
         WSLRollViewFlowLayout * layout = [[WSLRollViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.scrollStyle = WSLRollViewScrollStylePage;
@@ -722,7 +720,6 @@
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.decelerationRate = 0;
         _collectionView.scrollEnabled = self.scrollEnabled;
-        
     }
     return _collectionView;
 }
