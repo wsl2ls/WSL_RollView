@@ -242,6 +242,17 @@
     return self;
 }
 
+//获取某视图所在的控制器
++ (UIViewController *)viewControllerFromView:(UIView *)view {
+    for (UIView *next = [view superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
 #pragma mark - Help Methods
 
 - (void)setupUi{
@@ -397,7 +408,7 @@
     for (UIView * subView in self.subviews) {
         [subView removeFromSuperview];
     }
-    [self removeFromSuperview];
+//    [self removeFromSuperview];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -411,6 +422,9 @@
 - (void)didMoveToSuperview{
     [super didMoveToSuperview];
     if (self.superview) {
+        //处理collectionView 内容视图自动下移的问题
+        UIViewController * superVC = [WSLRollView viewControllerFromView:self];
+        superVC.automaticallyAdjustsScrollViewInsets = NO;
         [self reloadData];
     }
 }
