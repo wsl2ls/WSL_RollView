@@ -204,7 +204,11 @@
 //轮播右侧首尾相连的交汇点位置坐标 只有渐进效果用到
 @property (nonatomic, assign) CGPoint connectionPoint;
 
+//当前源数据的索引
 @property (nonatomic, assign) NSInteger currentPage;
+
+//处理后的数据cell索引
+@property (nonatomic, strong) NSIndexPath *indexPath;
 
 @end
 
@@ -372,10 +376,10 @@
     [_collectionView registerNib:nib forCellWithReuseIdentifier:identifier];
 }
 - (WSLRollViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndex:(NSInteger)index{
-    return [_collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    return [_collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:_indexPath];
 }
 - (WSLRollViewCell *)cellForItemAtIndexPath:(NSInteger)index{
-    return (WSLRollViewCell *)[_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    return (WSLRollViewCell *)[_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:[self rowOfDataSource:index] inSection:0]];
 }
 
 
@@ -408,7 +412,7 @@
     for (UIView * subView in self.subviews) {
         [subView removeFromSuperview];
     }
-//    [self removeFromSuperview];
+    //    [self removeFromSuperview];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -583,7 +587,7 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-     [self getCurrentIndex];
+    [self getCurrentIndex];
     if (!_loopEnabled) {
         return;
     }
@@ -678,6 +682,7 @@
 
 // 返回每个cell
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    _indexPath = indexPath;
     if ([self.delegate respondsToSelector:@selector(rollView:cellForItemAtIndex:)]) {
         return [self.delegate rollView:self cellForItemAtIndex:[self indexOfSourceArray:indexPath.row]];
     }else{
